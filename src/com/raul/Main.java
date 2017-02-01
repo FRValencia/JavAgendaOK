@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
-
     public static void main(String[] args) {
 
         //Imprimimos la bienvenida
@@ -22,37 +20,18 @@ public class Main {
 
         //crear la lista vacia
 
-        List<Contact> agenda = new ArrayList<>();
-
-
-        //creacion de dos contactos en la memoria
-        /*
-
-        Contact c1 = new Contact ();
-        c1.setName("Chiquito");
-        c1.setPhone("617617277");
-
-        Contact c2 = new Contact();
-        c2.setName("Carmen de Maierana");
-        c2.setPhone("617617777");
-
-
-        //añado contactos a la lista
-
-        agenda.add(c1);
-        agenda.add(c2);
-        */
+        Agenda.
 
         // imprimir la lista
-        System.out.println("This is the contacts list "+ agenda);
+        System.out.println("This is the contacts list "+ (agenda));
+
 
         boolean end = false;
 
         while (!end){
 
-            Prompt.print();
-
-
+            //Prompt.print();
+            System.out.print("(" + agenda.size() +") > ");
 
             String command = Prompt.read();
             Command com = CommandParser.parse(command);
@@ -60,18 +39,59 @@ public class Main {
             switch (com) {
 
                 case ADD:
+                    List<Contact> agenda = new ArrayList<>();
+                    System.out.println("Enter Name");
+                    System.out.print("(" + agenda.size() + ") > ");                          //ESTE es eL LOGO DEL PROMPT, con el numero de elementos de la lista
+                    Scanner scanner = new Scanner(System.in);
+                    String name = scanner.nextLine();
 
+                    System.out.println("Enter Phone");
+                    System.out.print("(" + agenda.size() + ") > ");                          //Con esto impirmo name primero y phone despues
+                    String phone = scanner.nextLine();
 
+                    Contact newContact = new Contact();                                     //cramos nuevo contacto
+                    newContact.setName(name);
+                    newContact.setPhone(phone);
 
+                    agenda.add(newContact);
 
+                    List<String> names = new ArrayList<>();                 //lista nombres y lista telefonos
+                    List<String> phones = new ArrayList<>();
+
+                    for (Contact c : agenda) {
+                        names.add(c.getName());
+                        phones.add(c.getPhone());
+                    }
+
+                    try {                                                   //lo metemos en un try catch para ver la excepcion y si va ok q pase a siguiente tarea
+                        createFile("names.txt", names);              //con esto creamos el archivo names.tx, lleno de names
+                        createFile("phones.txt", phones);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                     break;
+
 
                 case HELP:
                     Message.printHelp();
                     break;
 
                 case LIST:
+                    /*for (Contact c: agenda){
+                        System.out.println("Name: " + c.getName());
+                        System.out.println("Phone: " + c.getPhone());
+                        System.out.println("_____");
+                    }
+                    */
+
+                    for (int i = 0; i < agenda.size(); i++) {       //ejecutamos bucle for como tantos elementos tenga la lista
+                        Contact c = agenda.get(i);                  //esto saca el elemento de la lista que toca
+
+                        System.out.println("Name: " + c.getName());
+                        System.out.println("Phone: " + c.getPhone());
+                        System.out.println("_____");
+                    }
 
                     break;
 
@@ -81,6 +101,21 @@ public class Main {
 
                 case DELETE:
 
+                    System.out.println("Delete: ");
+                    try {
+                        Scanner scanner2 = new Scanner(System.in);
+                        int contactoABorrar = scanner2.nextInt();
+                        if (contactoABorrar <0 || contactoABorrar > agenda.size()){
+                            System.out.println("NOOOORLLL");
+                        }else {
+                            agenda.remove(contactoABorrar);
+                        }
+                    }catch (InputMismatchException e){
+                        System.out.println("You need to learn writing numbers, your tobacco, thnks");
+                    }
+
+                    //con esto borramos de la lista
+                    System.out.println("Contact deleted ");
                     break;
 
                 case QUIT:
@@ -94,26 +129,15 @@ public class Main {
 
 
 
-        for (Contact c: agenda){
-            System.out.println("Name: " + c.getName());
-            System.out.println("Phone: " + c.getPhone());
-            System.out.println("_____");
-        }
 
-        for (int i = 0; i < agenda.size(); i++) {       //ejecutamos bucle for como tantos elementos tenga la lista
-            Contact c = agenda.get(i);                  //esto saca el elemento de la lista que toca
-
-            System.out.println("Name: " + c.getName());
-            System.out.println("Phone: " + c.getPhone());
-            System.out.println("_____");
-
-
-        }
+/*
         System.out.print("(" + agenda.size() +") > ");                          //ESTE es eL LOGO DEL PROMPT, con el numero de elementos de la lista
         Scanner scanner = new Scanner(System.in);
+
         String name = scanner.nextLine();
 
-        System.out.print("(" + agenda.size() +") > ");                          //Con esto impirmo name primero y phone depsues
+
+        System.out.print("(" + agenda.size() +") > ");                          //Con esto impirmo name primero y phone despues
         String phone = scanner.nextLine();
 
 
@@ -122,7 +146,9 @@ public class Main {
         newContact.setPhone(phone);
 
         agenda.add(newContact);                                                 //con esto metemos el contacto en la lista
+*/
 
+/*
         for (int i = 0; i < agenda.size(); i++) {       //ejecutamos bucle for como tantos elementos tenga la lista
             Contact c = agenda.get(i);                  //esto saca el elemento de la lista que toca
 
@@ -133,9 +159,12 @@ public class Main {
         }
         //vamos a crear el archivo donde guardar la lista, vamos a hacerlo de las dos formas posbles, con un archivo  con dos
 
-        grabaListaUSandoDosFicheros(agenda);
-        cargaDosFicherosEImprime();                         //esto leera el archivo que estuviera creado
 
+        grabaListaUSandoDosFicheros(agenda);
+*/
+       // cargaDosFicherosEImprime();                         //esto leera el archivo que estuviera creado
+
+/*
         System.out.println("Borrar: ");
         try {
             int contactoABorrar = scanner.nextInt();
@@ -149,9 +178,9 @@ public class Main {
         }
 
         //con esto borramos de la lista
-
+*/
     }
-
+/*
     public static void grabaListaUSandoDosFicheros(List<Contact> contacts) {
         List<String> names = new ArrayList<>();                 //lista nombres y lista telefonos
         List<String> phones = new ArrayList<>();
@@ -169,7 +198,7 @@ public class Main {
         }
 
     }
-
+*/
     public static void cargaDosFicherosEImprime(){                  //con esto hace carga dos archivos e imprime
         List<String> names = readFile("names.txt");
         List<String> phones = readFile("phones.txt");
@@ -192,10 +221,7 @@ public class Main {
 
         }
 
-
     }
-
-
 
         public static void createFile(String file, List<String> arrData)
             throws IOException {
