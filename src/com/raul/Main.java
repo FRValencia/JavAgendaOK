@@ -46,11 +46,54 @@ public class Main {
         // imprimir la lista
         System.out.println("This is the contacts list "+ agenda);
 
+        boolean end = false;
+
+        while (!end){
+
+            Prompt.print();
+
+
+
+            String command = Prompt.read();
+            Command com = CommandParser.parse(command);
+
+            switch (com) {
+
+                case ADD:
 
 
 
 
-        
+
+                    break;
+
+                case HELP:
+                    Message.printHelp();
+                    break;
+
+                case LIST:
+
+                    break;
+
+                case UNKNOWN:
+                    System.out.println("Unknown command, try help");
+                    break;
+
+                case DELETE:
+
+                    break;
+
+                case QUIT:
+                    System.out.println("Bye");
+                    end = true;
+                    break;
+            }
+        }
+
+
+
+
+
         for (Contact c: agenda){
             System.out.println("Name: " + c.getName());
             System.out.println("Phone: " + c.getPhone());
