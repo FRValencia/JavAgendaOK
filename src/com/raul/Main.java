@@ -19,8 +19,21 @@ public class Main {
         );
 
         //crear la lista vacia
+        List<Contact> agenda = new ArrayList<>();
+        List<String> names = readFile("names.txt");
+        List<String> phones = readFile("phones.txt");
 
-        Agenda.
+        for (int i = 0; i < names.size(); i++) {                    //esto recorre todos los nobmres de arriba
+            Contact c= new Contact();
+            c.setName(names.get(i));                                //con esto creamos el conacto para montar la lista
+            c.setPhone(phones.get(i));
+
+            agenda.add(c);                                        //esto genera el contacto
+
+        }
+
+
+
 
         // imprimir la lista
         System.out.println("This is the contacts list "+ (agenda));
@@ -30,7 +43,7 @@ public class Main {
 
         while (!end){
 
-            //Prompt.print();
+
             System.out.print("(" + agenda.size() +") > ");
 
             String command = Prompt.read();
@@ -39,7 +52,7 @@ public class Main {
             switch (com) {
 
                 case ADD:
-                    List<Contact> agenda = new ArrayList<>();
+
                     System.out.println("Enter Name");
                     System.out.print("(" + agenda.size() + ") > ");                          //ESTE es eL LOGO DEL PROMPT, con el numero de elementos de la lista
                     Scanner scanner = new Scanner(System.in);
@@ -55,8 +68,8 @@ public class Main {
 
                     agenda.add(newContact);
 
-                    List<String> names = new ArrayList<>();                 //lista nombres y lista telefonos
-                    List<String> phones = new ArrayList<>();
+                     names = new ArrayList<>();                 //lista nombres y lista telefonos
+                     phones = new ArrayList<>();
 
                     for (Contact c : agenda) {
                         names.add(c.getName());
@@ -78,12 +91,7 @@ public class Main {
                     break;
 
                 case LIST:
-                    /*for (Contact c: agenda){
-                        System.out.println("Name: " + c.getName());
-                        System.out.println("Phone: " + c.getPhone());
-                        System.out.println("_____");
-                    }
-                    */
+
 
                     for (int i = 0; i < agenda.size(); i++) {       //ejecutamos bucle for como tantos elementos tenga la lista
                         Contact c = agenda.get(i);                  //esto saca el elemento de la lista que toca
